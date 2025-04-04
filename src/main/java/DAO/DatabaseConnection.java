@@ -38,29 +38,6 @@ public class DatabaseConnection {
 			}
 		}
 
-public static void main(String[] args) {
-
-	Connection hola = getConnection();	
-	System.out.println(isConnectionReady());	
-	
-	String obtain_empleados_query = "Select * from empleados;";
-	try {
-		PreparedStatement ps = hola.prepareStatement(obtain_empleados_query);
-		//Para cuando haces un SELECT
-		ps.executeQuery();
-		//Para cuando modificas tabla
-		//ps.executeUpdate(); 
-		
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}
-	
-	
 }
-
-
-}
-
-
 
 
