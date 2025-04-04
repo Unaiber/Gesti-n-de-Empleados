@@ -28,12 +28,13 @@ public class EmpleadosDAO {
 	}
 	
 	public void insertar(Empleado e) {
-		String sql = "INSERT INTO empleados (nombre,email,salario)" + "VALUES(?,?,?)";
+		String sql = "INSERT INTO empleados (nombre,email,salario, departamento_id)" + "VALUES(?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, e.getNombre());
 			ps.setString(2, e.getEmail());
 			ps.setInt(3, e.getSalario());
+			ps.setInt(4,e.getDepartamento_id());
 			ps.executeUpdate();
 			
 			ps.close();
@@ -51,7 +52,7 @@ public class EmpleadosDAO {
 
 	public ArrayList <Empleado> obtenerEmpleados() throws SQLException {
 		ArrayList<Empleado> lista = null;
-		String sql = "SELECT * FROM empleados";
+		String sql = "SELECT * FROM vista_empleado";
 		
 		
 	           try(  PreparedStatement ps = con.prepareStatement(sql);
@@ -62,7 +63,7 @@ public class EmpleadosDAO {
 	            	if(lista == null) {
 	            		lista = new ArrayList<Empleado>();
 	            	}
-	            	lista.add(new Empleado(rs.getString("nombre"),rs.getString("email"),rs.getInt("salario")));
+	            	lista.add(new Empleado(rs.getString("nombre"),rs.getString("email"),rs.getInt("salario"),rs.getString("departamento")));
 	                
 	            }
 		
