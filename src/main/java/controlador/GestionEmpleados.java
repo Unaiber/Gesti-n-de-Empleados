@@ -60,8 +60,9 @@ public class GestionEmpleados extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String email = request.getParameter("email");
 		int salario = Integer.parseInt(request.getParameter("salario"));
+		int departamento_id = Integer.parseInt(request.getParameter("departamento_id"));
 		
-		Empleado e = new Empleado (nombre, email,salario);
+		Empleado e = new Empleado (nombre, email,salario,departamento_id);
 		
 			
 		Connection con = DatabaseConnection.getConnection();

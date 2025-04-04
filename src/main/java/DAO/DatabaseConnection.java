@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
 		public static Connection instance = null;
-		private static final String JDBC_URL = "jdbc:mysql://localhost:3360/prueba_jbdc";
+		private static final String JDBC_URL = "jdbc:mysql://localhost:3360/gestorempleados";
 		
 		
 		
