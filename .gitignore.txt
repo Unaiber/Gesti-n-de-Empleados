@@ -1,0 +1,13 @@
+# Archivos de Eclipse
+.classpath
+.project
+.settings/
+
+# Archivos de compilación
+/bin/
+/target/
+*.class
+
+# Archivos de dependencias
+/.mvn/
+/.gradle/
