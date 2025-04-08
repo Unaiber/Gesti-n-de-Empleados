@@ -1,3 +1,4 @@
+
 package controlador;
 
 import jakarta.servlet.ServletException;
@@ -36,18 +37,59 @@ public class GestionEmpleados extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		String idStr = request.getParameter("id");
+		String optionStr = request.getParameter("option");
+		
+		PrintWriter out = response.getWriter();
+		
+		
+	if (idStr != null && optionStr != null && !idStr.isEmpty() && !optionStr.isEmpty()) {
+	       
 		try {
+			int id = Integer.parseInt(idStr);
+			int option = Integer.parseInt(optionStr);
 			
-			PrintWriter out = response.getWriter();
 			
-			String res = EmpleadosDAO.getConection().toJson();
-			//System.out.println(res);
-			out.print(res);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-}
+			if (option == 2) {
+                
+                Empleado e = new Empleado();
+                String rs = e.recibirEmpleados(id); 
+                out.print(rs);
+
+            
+            } else if (option == 3) {
+                Empleado e = new Empleado();
+                e.borrar(id);
+                out.print("Empleado borrado con éxito.");
+		
+		
+            }
+			
+			if (option == 0) {
+				try {
+					
+					String rs = EmpleadosDAO.getConection().toJson();
+					out.print(rs);
+					
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			
+			}
+				 } catch (NumberFormatException e) {
+			            out.print("Parámetros inválidos.");
+			        } catch (SQLException e) {
+			            e.printStackTrace();
+			            out.print("Error en la base de datos.");
+			        }
+			    } else {
+			       
+			        out.print("Parámetros 'id' y 'option' son necesarios.");
+			    }
+			}    	
+
 	
 
 	/**
@@ -56,29 +98,44 @@ public class GestionEmpleados extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
 		String nombre = request.getParameter("nombre");
 		String email = request.getParameter("email");
 		int salario = Integer.parseInt(request.getParameter("salario"));
 		int departamento_id = Integer.parseInt(request.getParameter("departamento_id"));
+		String idStr = request.getParameter("id");
 		
-		Empleado e = new Empleado (nombre, email,salario,departamento_id);
-		
-			
-		Connection con = DatabaseConnection.getConnection();
-		
+		//int id = Integer.parseInt(request.getParameter("id"));
 
-		try {
-			e.insertar();
+		
+		Empleado e = new Empleado (nombre,email,salario,departamento_id);
+		
+try {
 			
-		} catch (SQLException c) {
-			c.printStackTrace();
+			if (idStr != null && !idStr.isEmpty()) {
+				System.out.println("Quiero actualizar");
+				int id = Integer.parseInt(request.getParameter("id"));
+				e.setId(id);
+				e.actualizar();
+				
+				
+			}else {
+				System.out.println("Quiero insertar");
+				e.insertar();
+				
+			}
+			
+			
+		
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		
 		}
+response.sendRedirect("gestor/listadoEmpleados.html");
+System.out.println(e.toString());
+	    }
+
+	}		
 	
-	}
-		
-		
-		
-		}
 
 

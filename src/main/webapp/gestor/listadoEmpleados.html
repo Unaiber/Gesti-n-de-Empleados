@@ -6,19 +6,41 @@
 <link rel = stylesheet href = estilosListado.css>
 <script>
 function llamada(){
-	fetch('../GestionEmpleados')
+	fetch('../GestionEmpleados?id=0&option=0')
 	.then(response => response.json())
 	.then(data => pintarDatos(data))
 }
 
+function borrar(id){
+	//esto es un metodo del BOM esta en vigor, pero es mejor usar El dom con css
+
+	if(confirm("seguro que quieres borrar")){
+		
+    	fetch('../GestionEmpleados?id='+id+'&option=3')
+    	.then(response =>  response.json())
+    	.then(data => console.log(data))
+    	
+    	location.reload();
+
+	}
+	
+	
+}
 
 function pintarDatos(datos){
 	
-	let table = "<table border = 1>";
+	let table = "";
 	
 	for (let i=0; i<datos.length; i++){
 		
-		table += "<tr><td>" +datos[i].nombre + "</td><td>" +datos[i].email + "</td><td>" + datos[i].salario + "</td><td>" + datos[i].departamento +"</td></tr>"
+		table +=`<tr><td>
+		 ${datos[i].id}</td><td>
+		 ${datos[i].nombre}</td><td>
+		 ${datos[i].email}</td><td>
+		 ${datos[i].salario}</td><td>
+		 ${datos[i].departamento}</td><td>
+		 <a href='editorEmpleados.html?id=${datos[i].id}'>Editar</td></tr>`
+		
 	}
 	
 	table += "</table>";
@@ -39,10 +61,13 @@ window.onload = function(){
 	 <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Salario</th>
                 <th>Departamento</th>
+                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody id="tablaEmpleados">

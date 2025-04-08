@@ -1,13 +1,46 @@
-# Archivos de Eclipse
-.classpath
-.project
-.settings/
-
-# Archivos de compilación
+# Eclipse
+/.settings/
+/.classpath
+/.project
+/.buildpath
+# Directorios de compilación de Eclipse
 /bin/
 /target/
-*.class
 
-# Archivos de dependencias
+# Archivos de compilación de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Archivos de dependencias locales
+/lib/
+/*.log
+
+# Archivos de configuración específicos de la IDE
+.idea/
+*.iml
+
+# Archivos temporales
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store # Mac OS
+Thumbs.db # Windows
+
+# Archivos de Maven
 /.mvn/
-/.gradle/
+mvnw
+mvnw.cmd
+
+# Archivos de Gradle
+.gradle/
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Archivos de test
+/target/test-classes/
+/target/test-jar/
+/test-output/
+/*.tar.gz

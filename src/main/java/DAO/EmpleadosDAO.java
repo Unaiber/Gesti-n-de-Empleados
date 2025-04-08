@@ -28,7 +28,7 @@ public class EmpleadosDAO {
 	}
 	
 	public void insertar(Empleado e) {
-		String sql = "INSERT INTO empleados (nombre,email,salario, departamento_id)" + "VALUES(?,?,?,?)";
+		String sql = "INSERT INTO empleados (nombre,email,salario,departamento_id)" + "VALUES(?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, e.getNombre());
@@ -37,6 +37,7 @@ public class EmpleadosDAO {
 			ps.setInt(4,e.getDepartamento_id());
 			ps.executeUpdate();
 			
+		
 			ps.close();
 			}
 		
@@ -44,12 +45,45 @@ public class EmpleadosDAO {
 			
 			c.printStackTrace();
 			
-			}
+		}
+			
 	}
-	
-	
+
+
+	public int actualizar(Empleado e) throws SQLException{
+		   
+		int filas = 0;
+		String sql = "UPDATE empleados SET nombre = ?, email = ?, salario = ?, departamento_id = ? WHERE id = ?";
+	    PreparedStatement ps = con.prepareStatement(sql); 
+
+	        ps.setString(1, e.getNombre());
+	        ps.setString(2, e.getEmail());
+	        ps.setDouble(3, e.getSalario());
+	        ps.setInt(4, e.getDepartamento_id());
+	        ps.setInt(5,e.getId());
+	       
+	        filas = ps.executeUpdate();
+	        ps.close();
+	        return filas;
+
 	
 
+}
+	
+public int borrar(int id) throws SQLException {
+		
+		int filas =0;
+		
+		String sql = "DELETE FROM empleados WHERE id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		
+		filas = ps.executeUpdate();
+		ps.close();
+		
+		return filas;
+}
+	
 	public ArrayList <Empleado> obtenerEmpleados() throws SQLException {
 		ArrayList<Empleado> lista = null;
 		String sql = "SELECT * FROM vista_empleado";
@@ -63,7 +97,7 @@ public class EmpleadosDAO {
 	            	if(lista == null) {
 	            		lista = new ArrayList<Empleado>();
 	            	}
-	            	lista.add(new Empleado(rs.getString("nombre"),rs.getString("email"),rs.getInt("salario"),rs.getString("departamento")));
+	            	lista.add(new Empleado(rs.getInt("id"),rs.getString("nombre"),rs.getString("email"),rs.getInt("salario"),rs.getString("departamento")));
 	                
 	            }
 		
@@ -87,11 +121,33 @@ public class EmpleadosDAO {
 		return json;
 	}
 	
+
+
+	
+	public Empleado obtenerEmpleado (int id) throws SQLException {
+		
+		Empleado e = null;
+		
+		String sql = "SELECT * FROM empleados WHERE id = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		
+		e = new Empleado(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+		
+		
+		
+		return e;
+		
+	}
+
+	
 	
 }
-	
-	
-
 
 
 

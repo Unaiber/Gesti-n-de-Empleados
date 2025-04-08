@@ -2,6 +2,8 @@ package modelo;
 
 import java.sql.SQLException;
 
+import com.google.gson.Gson;
+
 import DAO.EmpleadosDAO;
 
 public class Empleado {
@@ -30,13 +32,25 @@ public class Empleado {
 		
 
 
-		public Empleado(String nombre, String email, int salario, String departamento) {
-			super();
+		public Empleado(int id,String nombre, String email, int salario, String departamento) {
+			this.id = id;
 			this.nombre = nombre;
 			this.email = email;
 			this.salario = salario;
 			this.departamento = departamento;
 		}
+		
+		
+
+		public int getId() {
+			return id;
+		}
+
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
 
 		public String getNombre() {
 			return nombre;
@@ -89,24 +103,68 @@ public class Empleado {
 
 		
 
+		
+		public void insertar() throws SQLException {
+			
+			EmpleadosDAO.getConection().insertar(this);
+			
+			
+		}
+		
+		public void actualizar() throws SQLException {
+			
+			EmpleadosDAO.getConection().actualizar(this);
+			
+		}
+		
+		public Empleado obtenerEmpleado(int id) throws SQLException {
+			
+			Empleado e = EmpleadosDAO.getConection().obtenerEmpleado(id);
+			System.out.println(e.toString());
+			return e;
+			
+		}
+
+		public String recibirEmpleados(int id) throws SQLException {
+			
+			Empleado e = EmpleadosDAO.getConection().obtenerEmpleado(id);
+			
+			
+			this.id = e.getId();
+			this.nombre = e.getNombre();
+			this.email = e.getEmail();
+			this.salario = e.getSalario();
+			this.departamento = e.getDepartamento();
+			
+			
+			Gson gson = new Gson();
+			String json = gson.toJson(this);
+			return json;
+	}
+			
+
+
+
+		public String dameJson(int id) throws SQLException {
+	
+	Gson gson = new Gson();
+	String json = gson.toJson(this.obtenerEmpleado(id));
+	return json;
+	
+	
+}
+		public void borrar(int id) throws SQLException {	
+	
+			int filas = EmpleadosDAO.getConection().borrar(id);
+	
+}
+
+
 		@Override
 		public String toString() {
 			return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", salario=" + salario
 					+ ", departamento_id=" + departamento_id + ", departamento=" + departamento + "]";
 		}
-
-
-		public void insertar() throws SQLException {
-			
-			EmpleadosDAO.getConection().insertar(this);
-			// TODO Auto-generated method stub
-			
-		}
-
-	}
-			
-
-	    
-
-	
+		
+}
 
