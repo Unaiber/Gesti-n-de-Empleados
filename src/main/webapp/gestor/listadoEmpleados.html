@@ -39,7 +39,8 @@ function pintarDatos(datos){
 		 ${datos[i].email}</td><td>
 		 ${datos[i].salario}</td><td>
 		 ${datos[i].departamento}</td><td>
-		 <a href='editorEmpleados.html?id=${datos[i].id}'>Editar</td></tr>`
+		 <a href='editorEmpleados.html?id=${datos[i].id}'>Editar</td><td>
+		 <a href="#" onclick="borrar(${datos[i].id})">Borrar</td></tr>`
 		
 	}
 	
@@ -74,5 +75,8 @@ window.onload = function(){
             <!-- Aquí se agregarán los empleados -->
         </tbody>
     </table>
+    
+    <a href="altaEmpleados.html" id="alta">Alta de Empleados</a>
+
 </body>
 </html>
