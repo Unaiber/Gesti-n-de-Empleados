@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - Gestión de Empleados</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Puedes añadir tu archivo CSS aquí -->
+    <script>
+        // Verificamos si el usuario está logueado al cargar la página
+        window.onload = function() {
+            if (!sessionStorage.getItem('usuarioLogueado')) {
+                window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login si no está logueado
+            }
+        };
+    </script>
+</head>
+<body>
+    <main>
+        <section class="button-container">
+            <h2>Gestión de Empleados</h2>
+            <div class="buttons">
+                <button onclick="location.href='altaEmpleados.html'">Alta de Empleado</button>
+                <button onclick="location.href='listadoEmpleados.html'">Listado de Empleados</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <button onclick="logout()">Cerrar sesión</button>
+    </footer>
+
+    <script>
+        // Función de logout
+        function logout() {
+            sessionStorage.removeItem('usuarioLogueado');
+            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
+        }
+    </script>
+</body>
+</html>

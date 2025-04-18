@@ -54,6 +54,16 @@ window.onload = function(){
 	llamada(getQueryVariable("id"));
 }
 
+
+// Filtro de seguridad para el dashboard
+window.onload = function() {
+    // Comprobamos si hay usuario logueado
+    if (!sessionStorage.getItem('usuarioLogueado')) {
+        // Si no hay, mandamos al login
+        window.location.href = '/EMPLEADOS/gestor/index.html';
+    }
+}
+
 </script>    
 </head>
 <body>
@@ -86,5 +96,16 @@ window.onload = function(){
    <a href = "listadoEmpleados.html" id="listado">
     <button>Listado de Empleados</button>
     </a>
+     <footer>
+        <button onclick="logout()">Cerrar sesión</button>
+    </footer>
+
+    <script>
+        // Función de logout
+        function logout() {
+            sessionStorage.removeItem('usuarioLogueado');
+            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
+        }
+    </script>
 </body>
 </html>

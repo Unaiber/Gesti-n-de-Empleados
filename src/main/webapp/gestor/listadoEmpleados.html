@@ -50,12 +50,16 @@ function pintarDatos(datos){
 	
 }
 
-window.onload = function(){
-	
-	llamada();
-	
+window.onload = function() {
+    
+    if (!sessionStorage.getItem('usuarioLogueado')) {
+       	window.location.href = '/EMPLEADOS/gestor/index.html';
+       	return;
+    }
+    	llamada();
 }
 </script>
+
 </head>
 <body>
 	<h2>Listado de Empleados</h2>
@@ -77,6 +81,17 @@ window.onload = function(){
     </table>
     
     <a href="altaEmpleados.html" id="alta">Alta de Empleados</a>
+ 
+ <footer>
+   <button onclick="logout()">Cerrar sesión</button>
+ </footer>
 
+    <script>
+        // Función de logout
+        function logout() {
+            sessionStorage.removeItem('usuarioLogueado');
+            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
+        }
+    </script>
 </body>
 </html>

@@ -10,11 +10,8 @@ import modelo.Empleado;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import DAO.DatabaseConnection;
 import DAO.EmpleadosDAO;
 
 /**
@@ -104,7 +101,7 @@ public class GestionEmpleados extends HttpServlet {
 		int departamento_id = Integer.parseInt(request.getParameter("departamento_id"));
 		String idStr = request.getParameter("id");
 		
-		//int id = Integer.parseInt(request.getParameter("id"));
+	
 
 		
 		Empleado e = new Empleado (nombre,email,salario,departamento_id);
