@@ -63,8 +63,14 @@ public class GestionUsuarios extends HttpServlet {
 
 	    String username = request.getParameter("username");
 	    String password = request.getParameter("password");
+	    String rol = request.getParameter("rol");
+	    String email = request.getParameter("email");
+	    String idStr = request.getParameter("id");
+	    String accion = request.getParameter("accion");
+	    
+	    Usuario u = new Usuario (username,password,rol,email);
 
-	    try {
+ try {
 	        // Obtener el usuario de la base de datos
 	        Usuario us = UsuariosDAO.obtenerUsername(username, password);
 
@@ -99,6 +105,23 @@ public class GestionUsuarios extends HttpServlet {
 
 	    System.out.println("Username recibido: " + username);
 	    System.out.println("Password recibido: " + password);
+	    
+ try {
+	 
+	 if (idStr != null && !idStr.isEmpty()) {
+		System.out.println("No es posible crear el nuevo usuario");
+	 }
+	 else if ("crearUsuario".equals(accion)){ 
+		 u.insertarUsuario();
+	 }
+	 
+	    
+	   } catch (SQLException ex) {
+			ex.printStackTrace();
+	    
+	    }
+			
 	}
 	
 }
+	

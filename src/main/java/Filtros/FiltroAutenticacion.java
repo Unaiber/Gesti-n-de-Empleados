@@ -30,7 +30,12 @@ public class FiltroAutenticacion implements Filter {
 	        if (session != null && session.getAttribute("usuarioLogueado") != null) {
 	            chain.doFilter(request, response); // sigue hacia la página solicitada
 	        } else {
-	            res.sendRedirect("login.html"); // redirige al login si no está autenticado
+	            res.sendRedirect("index.html"); // redirige al login si no está autenticado
 	        }
 	    }
+	    
+
+
 }
+
+	 	

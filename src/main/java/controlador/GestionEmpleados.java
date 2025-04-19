@@ -124,11 +124,10 @@ try {
 			
 		
 		} catch (SQLException ex) {
-			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		
 		}
-response.sendRedirect("gestor/listadoEmpleados.html");
+response.sendRedirect("listadoEmpleados.html");
 System.out.println(e.toString());
 	    }
 

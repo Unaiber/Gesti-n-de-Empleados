@@ -98,6 +98,12 @@ public class Usuario {
 		
 		
 	}
+
+	public void insertarUsuario() throws SQLException {
+
+		UsuariosDAO.getConection().insertarUsuario(this);
+		
+	}
 	
 	
 

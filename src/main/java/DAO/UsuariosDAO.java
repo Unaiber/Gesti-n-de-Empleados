@@ -12,6 +12,11 @@ public class UsuariosDAO {
 	
 	public  static Connection con;
 	
+	public UsuariosDAO () throws SQLException {
+		
+		UsuariosDAO.con = DatabaseConnection.getConnection();
+	}
+	
 	
 	public static UsuariosDAO getConection () throws SQLException {
 	
@@ -23,18 +28,15 @@ public class UsuariosDAO {
 	
 	public static Usuario obtenerUsername (String username, String password) throws SQLException{
 		String sql = "SELECT * FROM usuarios WHERE username = ?";
-		Connection con = DatabaseConnection.getConnection();
+		
 			
 		 try (PreparedStatement ps = con.prepareStatement(sql)) {
+			 	con = DatabaseConnection.getConnection();
 	            ps.setString(1, username);
 	            try (ResultSet rs = ps.executeQuery()) {
 	                if (rs.next()) {
 	                    // Recuperar el hash de la contraseña almacenado en la base de datos
 	                    String storedHash = rs.getString("password");
-	                    System.out.println("Password recibida: " + password);
-	                    System.out.println("Hash en BD: " + storedHash);
-	                    System.out.println("Coinciden? " + BCrypt.checkpw(password, storedHash));
-
 	                    // Verificar la contraseña proporcionada con el hash almacenado
 	                    if (BCrypt.checkpw(password, storedHash)) {
 	                        // La contraseña es correcta, crear el objeto Usuario
@@ -54,6 +56,29 @@ public class UsuariosDAO {
 	        return null;
 	        
 	    }
+	
+	public void insertarUsuario(Usuario u) {
+		
+		String sql = "INSERT INTO usuarios (username,password,rol,email)" + "VALUES(?,?,?,?)";
+		String hashedPassword = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			con = DatabaseConnection.getConnection();
+			ps.setString(1, u.getUsername());
+			ps.setString(2, hashedPassword);
+			ps.setString(3,u.getRol());
+			ps.setString(4, u.getEmail());
+			ps.executeUpdate();
+			
+			}
+		
+		catch (SQLException c) {
+			
+			c.printStackTrace();
+			
+		}
+			
+	}
 	}
 
 
