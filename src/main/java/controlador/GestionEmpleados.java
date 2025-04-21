@@ -48,12 +48,17 @@ public class GestionEmpleados extends HttpServlet {
 			int id = Integer.parseInt(idStr);
 			int option = Integer.parseInt(optionStr);
 			
-			
+			if (option == 0) {
+				try {
+					
+					String rs = EmpleadosDAO.getConection().toJson();
+					out.print(rs);
+					
 			if (option == 2) {
                 
                 Empleado e = new Empleado();
-                String rs = e.recibirEmpleados(id); 
-                out.print(rs);
+                String r = e.recibirEmpleados(id); 
+                out.print(r);
 
             
             } else if (option == 3) {
@@ -64,12 +69,7 @@ public class GestionEmpleados extends HttpServlet {
 		
             }
 			
-			if (option == 0) {
-				try {
-					
-					String rs = EmpleadosDAO.getConection().toJson();
-					out.print(rs);
-					
+			
 				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
@@ -77,9 +77,6 @@ public class GestionEmpleados extends HttpServlet {
 			}
 				 } catch (NumberFormatException e) {
 			            out.print("Parámetros inválidos.");
-			        } catch (SQLException e) {
-			            e.printStackTrace();
-			            out.print("Error en la base de datos.");
 			        }
 			    } else {
 			       
@@ -94,6 +91,7 @@ public class GestionEmpleados extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		
 		String nombre = request.getParameter("nombre");
 		String email = request.getParameter("email");
@@ -111,6 +109,7 @@ try {
 			if (idStr != null && !idStr.isEmpty()) {
 				System.out.println("Quiero actualizar");
 				int id = Integer.parseInt(request.getParameter("id"));
+				
 				e.setId(id);
 				e.actualizar();
 				
@@ -118,7 +117,7 @@ try {
 			}else {
 				System.out.println("Quiero insertar");
 				e.insertar();
-				
+				response.sendRedirect("gestor/panelPrincipal.html?registro=ok");
 			}
 			
 			

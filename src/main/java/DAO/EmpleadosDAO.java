@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.google.gson.Gson;
 
@@ -86,7 +85,7 @@ public int borrar(int id) throws SQLException {
 	
 	public ArrayList <Empleado> obtenerEmpleados() throws SQLException {
 		ArrayList<Empleado> lista = null;
-		String sql = "SELECT * FROM vista_empleado";
+		String sql = "SELECT * FROM empleados";
 		
 		
 	           try(  PreparedStatement ps = con.prepareStatement(sql);

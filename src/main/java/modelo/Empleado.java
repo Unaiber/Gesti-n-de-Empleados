@@ -23,6 +23,7 @@ public class Empleado {
 
 
 		public Empleado(String nombre, String email, int salario, int departamento_id) {
+			
 			this.nombre = nombre;
 			this.email = email;
 			this.salario = salario;
