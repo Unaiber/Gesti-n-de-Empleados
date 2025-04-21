@@ -42,86 +42,31 @@ public class GestionUsuarios extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		
-		if (request.getParameter("logout") != null) {
-	        response.setContentType("text/html");
-	        PrintWriter out = response.getWriter();
-	        out.println("<script>");
-	        out.println("sessionStorage.removeItem('usuarioLogueado');");
-	        out.println("window.location.href = '/EMPLEADOS/gestor/index.html';"); // Redirigir al login
-	        out.println("</script>");
-	        
-	        // Invalidar la sesión en el servidor
-	        HttpSession session = request.getSession(false);
-	        if (session != null) {
-	            session.invalidate(); // Cerrar sesión en el servidor
-	        }
-	        return; // Salir después de logout
-	    }
+			String username = request.getParameter("username");
+	        String password = request.getParameter("password");
+	        String email = request.getParameter("email");
+	        String rol = request.getParameter("rol");
+	        String accion = request.getParameter("accion");
 
-	    String username = request.getParameter("username");
-	    String password = request.getParameter("password");
-	    String rol = request.getParameter("rol");
-	    String email = request.getParameter("email");
-	    String idStr = request.getParameter("id");
-	    String accion = request.getParameter("accion");
-	    
-	    Usuario u = new Usuario (username,password,rol,email);
+	        Usuario u = new Usuario(username, password, rol, email);
+	      
 
- try {
-	        // Obtener el usuario de la base de datos
-	        Usuario us = UsuariosDAO.obtenerUsername(username, password);
-
-	        if (us != null) {
-	            // Login correcto
-	            HttpSession sesion = request.getSession();
-	            sesion.setAttribute("usuario", us);
-	            sesion.setAttribute("rol", us.getRol());
-	            sesion.setAttribute("usuarioLogueado", true);
+	        try  {
+	            UsuariosDAO dao = new UsuariosDAO();
 	            
-	            // Enviar el script para establecer sessionStorage y redirigir
-	            response.setContentType("text/html");
-	            PrintWriter out = response.getWriter();
-	            out.println("<script>");
-	            out.println("sessionStorage.setItem('usuarioLogueado', 'true');"); // Establecer el valor en sessionStorage
-	            out.println("window.location.href = '/EMPLEADOS/gestor/panelPrincipal.html';"); // Redirigir al dashboard
-	            out.println("</script>");
+	            if ("crearUsuario".equals(accion)) {
+	            	dao.insertarUsuario(u);
+
+	            }
 	            
-	            // Logueo correcto
-	            System.out.println("Usuario autenticado: " + us.getUsername());
-	            System.out.println("Rol del usuario: " + us.getRol());
-	            System.out.println("Usuario logueado: " + sesion.getAttribute("usuarioLogueado"));
-	        } else {
-	            // Login fallido
-	            response.sendRedirect("gestor/index.html?error=true");
+	            else {
+	            	response.sendRedirect("gestor/panelPrincipal.html");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            response.sendRedirect("gestor/altaUsuarios.html?error=bd");
 	        }
-
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        response.sendRedirect("gestor/index.html?error=db");
 	    }
-
-	    System.out.println("Username recibido: " + username);
-	    System.out.println("Password recibido: " + password);
-	    
- try {
-	 
-	 if (idStr != null && !idStr.isEmpty()) {
-		System.out.println("No es posible crear el nuevo usuario");
-	 }
-	 else if ("crearUsuario".equals(accion)){ 
-		 u.insertarUsuario();
-	 }
-	 
-	    
-	   } catch (SQLException ex) {
-			ex.printStackTrace();
-	    
-	    }
-			
 	}
-	
-}
 	

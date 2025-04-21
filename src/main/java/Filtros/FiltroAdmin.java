@@ -27,7 +27,7 @@ public class FiltroAdmin implements Filter{
  		if (sesion != null && "ADMIN".equals(sesion.getAttribute("rol"))) {
  			chain.doFilter(request, response); // Permitir acceso si es admin
  		} else {
- 			res.sendRedirect("panelPrincipal.html?error=accesoDenegado");
+ 			res.sendRedirect(req.getContextPath() + "/gestor/panelPrincipal.html?error=accesoDenegado");
  		}
  	}
     

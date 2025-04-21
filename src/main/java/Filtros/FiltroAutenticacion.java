@@ -11,7 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-@WebFilter(urlPatterns = {"/gestor/panelPrincipal.html",
+@WebFilter(urlPatterns = {
+		"/gestor/panelPrincipal.html",
 	    "/gestor/empleados.html",
 	    "/gestor/listadoEmpleados.html",
 	    "/gestor/editorEmpleados.html",
@@ -26,16 +27,19 @@ public class FiltroAutenticacion implements Filter {
 
 	        HttpSession session = req.getSession(false); // No crear una nueva sesión si no hay
 
-	        // Validación: si hay sesión y el atributo "usuarioLogueado" está presente, dejamos pasar
-	        if (session != null && session.getAttribute("usuarioLogueado") != null) {
-	            chain.doFilter(request, response); // sigue hacia la página solicitada
-	        } else {
-	            res.sendRedirect("index.html"); // redirige al login si no está autenticado
+	        boolean logueado = (session != null && session.getAttribute("usuarioLogueado") != null);
+
+	        if (!logueado) {
+	            res.sendRedirect(req.getContextPath() + "/gestor/index.html");
+	            return;
 	        }
+
+	        chain.doFilter(request, response);
 	    }
+	}
 	    
 
 
-}
+
 
 	 	

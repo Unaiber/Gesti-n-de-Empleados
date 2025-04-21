@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal - Gestión de Empleados</title>
     <link rel="stylesheet" href="styles.css"> <!-- Puedes añadir tu archivo CSS aquí -->
-    <script>
-        // Verificamos si el usuario está logueado al cargar la página
-        window.onload = function() {
-            if (!sessionStorage.getItem('usuarioLogueado')) {
-                window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login si no está logueado
-            }
-        };
-    </script>
 </head>
 <body>
     <main>
@@ -36,6 +28,7 @@
             sessionStorage.removeItem('usuarioLogueado');
             window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
         }
+       
     </script>
 </body>
 </html>

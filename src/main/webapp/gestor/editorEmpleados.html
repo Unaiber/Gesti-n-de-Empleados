@@ -54,16 +54,6 @@ window.onload = function(){
 	llamada(getQueryVariable("id"));
 }
 
-
-// Filtro de seguridad para el dashboard
-window.onload = function() {
-    // Comprobamos si hay usuario logueado
-    if (!sessionStorage.getItem('usuarioLogueado')) {
-        // Si no hay, mandamos al login
-        window.location.href = '/EMPLEADOS/gestor/index.html';
-    }
-}
-
 </script>    
 </head>
 <body>

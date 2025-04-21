@@ -28,10 +28,10 @@ public class UsuariosDAO {
 	
 	public static Usuario obtenerUsername (String username, String password) throws SQLException{
 		String sql = "SELECT * FROM usuarios WHERE username = ?";
-		
+		con = DatabaseConnection.getConnection();
 			
 		 try (PreparedStatement ps = con.prepareStatement(sql)) {
-			 	con = DatabaseConnection.getConnection();
+			 	
 	            ps.setString(1, username);
 	            try (ResultSet rs = ps.executeQuery()) {
 	                if (rs.next()) {
@@ -58,18 +58,18 @@ public class UsuariosDAO {
 	    }
 	
 	public void insertarUsuario(Usuario u) {
-		
+		con = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO usuarios (username,password,rol,email)" + "VALUES(?,?,?,?)";
 		String hashedPassword = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			con = DatabaseConnection.getConnection();
+			
 			ps.setString(1, u.getUsername());
 			ps.setString(2, hashedPassword);
 			ps.setString(3,u.getRol());
 			ps.setString(4, u.getEmail());
 			ps.executeUpdate();
-			
+			ps.close();
 			}
 		
 		catch (SQLException c) {

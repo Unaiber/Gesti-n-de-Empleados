@@ -5,19 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-        // Filtro de seguridad para el dashboard
-        window.onload = function() {
-            // Comprobamos si hay usuario logueado
-            if (!sessionStorage.getItem('usuarioLogueado')) {
-                // Si no hay, mandamos al login
-                window.location.href = '/EMPLEADOS/gestor/index.html';
-            }
-        }
-    </script>
 </head>
 <body>
-<h2>Registrar Nuevo Empleado</h2>
+<h2>Registrar Nuevo Usuario</h2>
   <form action="../GestionUsuarios" method="POST" class = "form-alta">
   	 <input type="hidden" name="accion" value="crearUsuario">
   
@@ -41,18 +31,16 @@
    
   </form>
   
-   <a href = "listadoEmpleados.html" id="listado">
-    <button>Listado de Empleados</button>
+   <a href = "panelPrincipal.html" id="listado">
+    <button>Menú principal</button>
     </a>
-     <footer>
-        <button onclick="logout()">Cerrar sesión</button>
-    </footer>
-
-    <script>
-        // Función de logout
-        function logout() {
-            sessionStorage.removeItem('usuarioLogueado');
-            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
+    
+<script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('registro')) {
+            alert('El registro se ha completado correctamente!');
+            window.location.href = '/EMPLEADOS/gestor/panelPrincipal.html';
+            
         }
     </script>
 </body>
