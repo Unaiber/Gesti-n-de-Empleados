@@ -38,18 +38,10 @@ function  llenarFormulario(datos) {
 	document.getElementById('salario').value = datos.salario;
 	document.getElementById('departamento_id').value = datos.departamento_id;
 	console.log(datos.id);
-	
-	//document.getElementById('boton').value = "Actualizar";
 
 }
 
-
-
-
-
 window.onload = function(){
-	//console.log("El id es:  ")
-	//console.log(getQueryVariable("id"));
 	
 	llamada(getQueryVariable("id"));
 }

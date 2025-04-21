@@ -42,49 +42,42 @@ public class GestionEmpleados extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		
-	if (idStr != null && optionStr != null && !idStr.isEmpty() && !optionStr.isEmpty()) {
-	       
-		try {
-			int id = Integer.parseInt(idStr);
-			int option = Integer.parseInt(optionStr);
-			
-			if (option == 0) {
-				try {
-					
-					String rs = EmpleadosDAO.getConection().toJson();
-					out.print(rs);
-					
-			if (option == 2) {
-                
-                Empleado e = new Empleado();
-                String r = e.recibirEmpleados(id); 
-                out.print(r);
+		if (idStr != null && optionStr != null && !idStr.isEmpty() && !optionStr.isEmpty()) {
+		    try {
+		        int id = Integer.parseInt(idStr);
+		        int option = Integer.parseInt(optionStr);
 
-            
-            } else if (option == 3) {
-                Empleado e = new Empleado();
-                e.borrar(id);
-                out.print("Empleado borrado con éxito.");
-		
-		
-            }
-			
-			
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			
+		        switch (option) {
+		            case 0:
+		                response.setContentType("application/json");
+		                response.setCharacterEncoding("UTF-8");
+		                String rs = EmpleadosDAO.getConection().toJson();
+		                out.print(rs);
+		                break;
+		            case 2:
+		                Empleado e = new Empleado();
+		                String r = e.recibirEmpleados(id);
+		                out.print(r);
+		                break;
+		            case 3:
+		                Empleado ex = new Empleado();
+		                ex.borrar(id);
+		                out.print("Empleado borrado con éxito.");
+		                break;
+		            default:
+		                out.print("Opción no válida.");
+		                break;
+		        }
+		    } catch (NumberFormatException e) {
+		        out.print("Parámetros inválidos.");
+		    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-				 } catch (NumberFormatException e) {
-			            out.print("Parámetros inválidos.");
-			        }
-			    } else {
-			       
-			        out.print("Parámetros 'id' y 'option' son necesarios.");
-			    }
-			}    	
-
-	
+		} else {
+		    out.print("Parámetros 'id' y 'option' son necesarios.");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -112,12 +105,13 @@ try {
 				
 				e.setId(id);
 				e.actualizar();
+				response.sendRedirect("gestor/panelPrincipal.html?registro=ok");
 				
 				
 			}else {
 				System.out.println("Quiero insertar");
 				e.insertar();
-				response.sendRedirect("gestor/panelPrincipal.html?registro=ok");
+				response.sendRedirect("gestor/listadoEmpleados.html?registro=ok");
 			}
 			
 			
@@ -126,7 +120,6 @@ try {
 			ex.printStackTrace();
 		
 		}
-response.sendRedirect("listadoEmpleados.html");
 System.out.println(e.toString());
 	    }
 

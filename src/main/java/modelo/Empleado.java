@@ -159,8 +159,6 @@ public class Empleado {
 			int filas = EmpleadosDAO.getConection().borrar(id);
 	
 }
-
-
 		@Override
 		public String toString() {
 			return "Empleado [id=" + id + ", nombre=" + nombre + ", email=" + email + ", salario=" + salario

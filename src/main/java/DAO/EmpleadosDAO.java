@@ -96,12 +96,10 @@ public int borrar(int id) throws SQLException {
 	            	if(lista == null) {
 	            		lista = new ArrayList<Empleado>();
 	            	}
-	            	lista.add(new Empleado(rs.getInt("id"),rs.getString("nombre"),rs.getString("email"),rs.getInt("salario"),rs.getString("departamento")));
+	            	lista.add(new Empleado(rs.getInt("id"),rs.getString("nombre"),rs.getString("email"),rs.getInt("salario"),rs.getString("departamento_id")));
 	                
 	            }
-		
-		
-	ps.close();	
+
 	return lista;
 	}
 	
@@ -125,9 +123,9 @@ public int borrar(int id) throws SQLException {
 	
 	public Empleado obtenerEmpleado (int id) throws SQLException {
 		
-		Empleado e = null;
+	
 		
-		String sql = "SELECT * FROM empleados WHERE id = ?";
+		String sql = "SELECT * FROM vista_empleado WHERE id = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
@@ -136,7 +134,7 @@ public int borrar(int id) throws SQLException {
 		
 		rs.next();
 		
-		e = new Empleado(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+		Empleado e = new Empleado(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
 		
 		
 		

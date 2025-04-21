@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel = stylesheet href = estilosListado.css>
+
 <script>
+
+
 function llamada(){
 	fetch('../GestionEmpleados?id=0&option=0')
 	.then(response => response.json())
@@ -48,6 +51,8 @@ function pintarDatos(datos){
 	document.getElementById("tablaEmpleados").innerHTML = table;
 	
 }
+
+window.onload = llamada;
 
 </script>
 
