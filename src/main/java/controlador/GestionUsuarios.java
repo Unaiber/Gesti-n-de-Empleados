@@ -57,6 +57,7 @@ public class GestionUsuarios extends HttpServlet {
 	            
 	            if ("crearUsuario".equals(accion)) {
 	            	dao.insertarUsuario(u);
+	            	response.sendRedirect("gestor/panelPrincipal.html?registro=ok");
 
 	            }
 	            
