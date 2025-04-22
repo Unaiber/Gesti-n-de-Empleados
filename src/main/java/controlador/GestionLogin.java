@@ -58,8 +58,8 @@ public class GestionLogin extends HttpServlet {
             if (us != null) {
                 HttpSession sesion = request.getSession();
                 sesion.setAttribute("usuario", us);
-                sesion.setAttribute("rol", us.getRol());
-                sesion.setAttribute("usuarioLogueado", true);
+                //sesion.setAttribute("rol", us.getRol());
+                //sesion.setAttribute("usuarioLogueado", true);
                 response.sendRedirect("gestor/panelPrincipal.html");
                 
                 System.out.println("Usuario autenticado: " + us.getUsername());

@@ -1,0 +1,112 @@
+ body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    form.form-alta {
+        width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form.form-alta label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    form.form-alta input,
+    form.form-alta select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    form.form-alta input:focus,
+    form.form-alta select:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    button.btn {
+        width: 100%;
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button.btn:hover {
+        background-color: #2980b9;
+    }
+
+    #listado {
+        display: block;
+        width: 400px;
+        margin: 20px auto;
+    }
+
+    #listado button {
+        width: 100%;
+        background-color: #95a5a6;
+        border: none;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #listado button:hover {
+        background-color: #7f8c8d;
+    }
+
+    footer {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    footer button {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    @media (max-width: 500px) {
+        form.form-alta, #listado {
+            width: 90%;
+            padding: 20px;
+        }
+
+        button.btn, #listado button {
+            font-size: 14px;
+            padding: 10px;
+        }
+    }

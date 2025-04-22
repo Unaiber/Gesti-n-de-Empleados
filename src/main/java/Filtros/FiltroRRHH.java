@@ -11,12 +11,12 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import modelo.Usuario;
 
 
 @WebFilter(urlPatterns = {
 		"/gestor/altaEmpleados.html",
 		"/gestor/editorEmpleados.html",
-		"/gestor/listadoEmpleados.html",
 })
 public class FiltroRRHH implements Filter{
 	
@@ -27,8 +27,10 @@ public class FiltroRRHH implements Filter{
  		HttpServletResponse res = (HttpServletResponse) response;
 
  		HttpSession sesion = req.getSession(false);
+ 		Usuario u = (Usuario) sesion.getAttribute("usuario");
 
- 		if (sesion != null && ("RRHH".equals(sesion.getAttribute("rol")) || "ADMIN".equals(sesion.getAttribute("rol")))) {
+ 		if (sesion != null && u != null && 
+ 	            ("ADMIN".equals(u.getRol()) || "RRHH".equals(u.getRol()))) {
  			chain.doFilter(request, response); // Permitir acceso si es admin
  		} else {
  			res.sendRedirect(req.getContextPath() + "/gestor/panelPrincipal.html?error=accesoDenegado");

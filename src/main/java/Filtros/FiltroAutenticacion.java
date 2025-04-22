@@ -9,14 +9,12 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import modelo.Usuario;
 
 import java.io.IOException;
 @WebFilter(urlPatterns = {
 		"/gestor/panelPrincipal.html",
-	    "/gestor/empleados.html",
-	    "/gestor/listadoEmpleados.html",
-	    "/gestor/editorEmpleados.html",
-	    "/gestor/altaEmpleados.html"})
+	    "/gestor/listadoEmpleados.html"})
 public class FiltroAutenticacion implements Filter {
 
 	    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -27,7 +25,8 @@ public class FiltroAutenticacion implements Filter {
 
 	        HttpSession session = req.getSession(false); // No crear una nueva sesión si no hay
 
-	        boolean logueado = (session != null && session.getAttribute("usuarioLogueado") != null);
+	        Usuario u = (Usuario) session.getAttribute("usuario");
+	        boolean logueado = (session != null && u != null);
 
 	        if (!logueado) {
 	            res.sendRedirect(req.getContextPath() + "/gestor/index.html");

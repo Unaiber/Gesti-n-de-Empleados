@@ -4,23 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal - Gestión de Empleados</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Puedes añadir tu archivo CSS aquí -->
+    <link rel="stylesheet" href="estilosPPrincipal.css"> 
 </head>
 <body>
-    <main>
-        <section class="button-container">
-            <h2>Gestión de Empleados</h2>
-            <div class="buttons">
-                <button onclick="location.href='altaEmpleados.html'">Alta de Empleado</button>
-                <button onclick="location.href='listadoEmpleados.html'">Listado de Empleados</button>
-            	<button onclick="location.href='altaUsuarios.html'">Alta de Usuarios</button>
-            </div>
-        </section>
-    </main>
+   <main>
+    <h2>Gestión de Empleados</h2>
+    <section class="button-container">
+        <div class="menu-option" onclick="location.href='altaEmpleados.html'">
+            <h3>Alta de Empleado</h3>
+            <p>Agrega un nuevo empleado a la base de datos.</p>
+        </div>
 
-    <footer>
-        <button onclick="logout()">Cerrar sesión</button>
-    </footer>
+        <div class="menu-option" onclick="location.href='listadoEmpleados.html'">
+            <h3>Listado de Empleados</h3>
+            <p>Consulta y administra los empleados registrados en la plataforma.</p>
+        </div>
+
+        <div class="menu-option" onclick="location.href='altaUsuarios.html'">
+            <h3>Alta de Usuarios</h3>
+            <p>Registra nuevos usuarios en el sistema.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <button onclick="logout()">Cerrar sesión</button>
+</footer>
 
     <script>
         // Función de logout
