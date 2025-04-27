@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel = stylesheet href = estilosListado.css>
+<link rel="stylesheet" href="estilosHeaderFooter.css"> 
 
 <script>
 
@@ -58,6 +59,10 @@ window.onload = llamada;
 
 </head>
 <body>
+<header class="main-header">
+    <h1>Gestión de Empleados</h1>
+    <p>Bienvenido al sistema de gestión interna</p>
+</header>
 	<h2>Listado de Empleados</h2>
 	 <table>
         <thead>
@@ -76,11 +81,13 @@ window.onload = llamada;
         </tbody>
     </table>
     
-    <a href="altaEmpleados.html" id="alta">Alta de Empleados</a>
+    <a href="panelPrincipal.html" id="botonMenu">Menú Principal</a>
  
- <footer>
-   <button onclick="logout()">Cerrar sesión</button>
- </footer>
+ <footer class="main-footer">
+	<button onclick="logout()">Cerrar sesión</button>
+    <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
+</footer>
+
 
     <script>
         // Función de logout

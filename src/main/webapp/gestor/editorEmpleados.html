@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href = "estilosAlta.css">
+<link rel="stylesheet" href="estilosHeaderFooter.css">
 <script>
 
 
@@ -48,6 +49,10 @@ window.onload = function(){
 
 </script>    
 </head>
+<header class="main-header">
+    <h1>Gestión de Empleados</h1>
+    <p>Bienvenido al sistema de gestión interna</p>
+</header>
 <body>
 <h2>Editar Empleado</h2>
   <form action="../GestionEmpleados" method="POST" class = "form-alta">
@@ -75,12 +80,12 @@ window.onload = function(){
    
   </form>
   
-   <a href = "listadoEmpleados.html" id="listado">
-    <button>Listado de Empleados</button>
-    </a>
-     <footer>
-        <button onclick="logout()">Cerrar sesión</button>
-    </footer>
+   <a href = "panelPrincipal.html" id="botonMenú">Menú Principal</a>
+     <footer class="main-footer">
+	<button onclick="logout()">Cerrar sesión</button>
+    <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
+	</footer>
+
 
     <script>
         // Función de logout

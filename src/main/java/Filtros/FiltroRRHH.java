@@ -27,14 +27,19 @@ public class FiltroRRHH implements Filter{
  		HttpServletResponse res = (HttpServletResponse) response;
 
  		HttpSession sesion = req.getSession(false);
- 		Usuario u = (Usuario) sesion.getAttribute("usuario");
 
- 		if (sesion != null && u != null && 
- 	            ("ADMIN".equals(u.getRol()) || "RRHH".equals(u.getRol()))) {
- 			chain.doFilter(request, response); // Permitir acceso si es admin
- 		} else {
- 			res.sendRedirect(req.getContextPath() + "/gestor/panelPrincipal.html?error=accesoDenegado");
- 		}
- 	}
+ 		if (sesion == null || sesion.getAttribute("usuario") == null) {
+            res.sendRedirect(req.getContextPath() + "/gestor/index.html");
+            return;
+        }
+
+        Usuario u = (Usuario) sesion.getAttribute("usuario");
+
+        if ("ADMIN".equals(u.getRol()) || "RRHH".equals(u.getRol())) {
+            chain.doFilter(request, response);
+        } else {
+            res.sendRedirect(req.getContextPath() + "/gestor/panelPrincipal.html?error=accesoDenegado");
+        }
+    }
     
 }

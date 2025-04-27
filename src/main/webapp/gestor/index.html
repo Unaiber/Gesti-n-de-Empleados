@@ -5,9 +5,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href = "estilosLogin.css">
 </head>
+
 <body>
 	<h2>Iniciar Sesión</h2>
-
+<main>
 <form class="form-alta" action="../GestionLogin" method="post">
     <label for="username">Usuario</label>
     <input type="text" id="username" name="username" required>
@@ -17,6 +18,9 @@
 
     <button class="btn" type="submit">Entrar</button>
 </form>
+</main>
+
+
 	 <script>
         const params = new URLSearchParams(window.location.search);
         if (params.has('error')) {

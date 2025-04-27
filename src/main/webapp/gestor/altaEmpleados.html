@@ -4,9 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href = "estilosAlta.css">
+<link rel="stylesheet" href="estilosHeaderFooter.css">
 
 </head>
 <body>
+<header class="main-header">
+    <h1>Gestión de Empleados</h1>
+    <p>Bienvenido al sistema de gestión interna</p>
+</header>
+<main>
 <h2>Registrar Nuevo Empleado</h2>
   <form action="../GestionEmpleados" method="POST" class = "form-alta">
     <label for="nombre">Nombre:</label>
@@ -29,13 +35,17 @@
     
    
   </form>
+  </main>
   
-   <a href = "listadoEmpleados.html" id="listado">
-    <button>Listado de Empleados</button>
+  
+   <a href = "panelPrincipal.html" id="botonMenú">
+    <button>Menú Principal</button>
     </a>
-     <footer>
-        <button onclick="logout()">Cerrar sesión</button>
-    </footer>
+     <footer class="main-footer">
+	<button onclick="logout()">Cerrar sesión</button>
+    <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
+</footer>
+
 
     <script>
         // Función de logout

@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal - Gestión de Empleados</title>
-    <link rel="stylesheet" href="estilosPPrincipal.css"> 
+    <link rel="stylesheet" href="estilosPPrincipal.css">
+    <link rel="stylesheet" href="estilosHeaderFooter.css"> 
 </head>
 <body>
+<header class="main-header">
+    <h1>Gestión de Empleados</h1>
+    <p>Bienvenido al sistema de gestión interna</p>
+</header>
    <main>
-    <h2>Gestión de Empleados</h2>
     <section class="button-container">
         <div class="menu-option" onclick="location.href='altaEmpleados.html'">
             <h3>Alta de Empleado</h3>
@@ -26,10 +30,11 @@
         </div>
     </section>
 </main>
-
-<footer>
-    <button onclick="logout()">Cerrar sesión</button>
+<footer class="main-footer">
+	<button onclick="logout()">Cerrar sesión</button>
+    <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
 </footer>
+
 
     <script>
         // Función de logout

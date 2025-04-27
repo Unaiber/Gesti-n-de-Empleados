@@ -4,10 +4,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href = "estilosAltaUs.css">
+<link rel="stylesheet" href="estilosHeaderFooter.css"> 
 </head>
 <body>
-</head>
-<body>
+<header class="main-header">
+    <h1>Gestión de Empleados</h1>
+    <p>Bienvenido al sistema de gestión interna</p>
+</header>
+<main>
 <h2>Registrar Nuevo Usuario</h2>
   <form action="../GestionUsuarios" method="POST" class = "form-alta">
   	 <input type="hidden" name="accion" value="crearUsuario">
@@ -31,10 +35,15 @@
     
    
   </form>
-  
-   <a href = "panelPrincipal.html" id="listado">
+  </main>
+   <a href = "panelPrincipal.html" id="botonMenu">
     <button>Menú principal</button>
     </a>
+    
+    <footer class="main-footer">
+	<button onclick="logout()">Cerrar sesión</button>
+    <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
+	</footer>
     
 <script>
         const params = new URLSearchParams(window.location.search);

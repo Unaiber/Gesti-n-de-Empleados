@@ -43,7 +43,6 @@ public class UsuariosDAO {
 	                        Usuario us = new Usuario();
 	                        us.setUsername(rs.getString("username"));
 	                        us.setEmail(rs.getString("email"));
-	                        us.setPassword(storedHash);  // Opción: puedes almacenar solo el hash aquí
 	                        us.setRol(rs.getString("rol"));
 	                        return us;
 	                    } else {

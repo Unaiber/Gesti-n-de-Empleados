@@ -61,15 +61,15 @@
         background-color: #2980b9;
     }
 
-    #listado {
+    #botonMenu {
         display: block;
         width: 400px;
         margin: 20px auto;
     }
 
-    #listado button {
+    #botonMenu button {
         width: 100%;
-        background-color: #95a5a6;
+        background-color: #2ecc71;
         border: none;
         color: white;
         padding: 12px;
@@ -79,28 +79,13 @@
         cursor: pointer;
     }
 
-    #listado button:hover {
-        background-color: #7f8c8d;
+    #botonMenu button:hover {
+        background-color: #27ae60;
     }
 
-    footer {
-        margin-top: 30px;
-        text-align: center;
-    }
-
-    footer button {
-        background-color: #e74c3c;
-        border: none;
-        color: white;
-        padding: 12px 20px;
-        font-size: 15px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-    }
 
     @media (max-width: 500px) {
-        form.form-alta, #listado {
+        form.form-alta, #botonMenu {
             width: 90%;
             padding: 20px;
         }

@@ -9,7 +9,6 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelo.Usuario;
 
 import java.io.IOException;
 @WebFilter(urlPatterns = {
@@ -23,12 +22,10 @@ public class FiltroAutenticacion implements Filter {
 	        HttpServletRequest req = (HttpServletRequest) request;
 	        HttpServletResponse res = (HttpServletResponse) response;
 
-	        HttpSession session = req.getSession(false); // No crear una nueva sesión si no hay
+	        HttpSession sesion = req.getSession(false); // No crear una nueva sesión si no hay
 
-	        Usuario u = (Usuario) session.getAttribute("usuario");
-	        boolean logueado = (session != null && u != null);
 
-	        if (!logueado) {
+	        if (sesion == null || sesion.getAttribute("usuario") == null) {
 	            res.sendRedirect(req.getContextPath() + "/gestor/index.html");
 	            return;
 	        }
