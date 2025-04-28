@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href = "estilosAlta.css">
-<link rel="stylesheet" href="estilosHeaderFooter.css">
+<title>Alta de Empleados</title>
+<link rel="stylesheet" href = "styles/estilosAlta.css">
+<link rel="stylesheet" href = "styles/estilosHeaderFooter.css">
 
 </head>
 <body>
@@ -41,24 +41,11 @@
    <a href = "panelPrincipal.html" id="botonMenú">
     <button>Menú Principal</button>
     </a>
-     <footer class="main-footer">
+    <footer class="main-footer">
 	<button onclick="logout()">Cerrar sesión</button>
     <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
-</footer>
-
-
-    <script>
-        // Función de logout
-        function logout() {
-            sessionStorage.removeItem('usuarioLogueado');
-            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
-        }
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('registro')) {
-            alert('El registro se ha completado correctamente!');
-            window.location.href = '/EMPLEADOS/gestor/panelPrincipal.html';
-            
-        }
-    </script>
+	</footer>
+    <script src = "js/logout.js"></script>
+    <script src = "js/registroOk.js"></script>
 </body>
 </html>
