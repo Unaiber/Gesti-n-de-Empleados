@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal - Gestión de Empleados</title>
-    <link rel="stylesheet" href="estilosPPrincipal.css">
-    <link rel="stylesheet" href="estilosHeaderFooter.css"> 
+    <link rel="stylesheet" href="styles/estilosPPrincipal.css">
+    <link rel="stylesheet" href="styles/estilosHeaderFooter.css"> 
 </head>
 <body>
 <header class="main-header">
@@ -34,21 +34,7 @@
 	<button onclick="logout()">Cerrar sesión</button>
     <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
 </footer>
-
-
-    <script>
-        // Función de logout
-        function logout() {
-            sessionStorage.removeItem('usuarioLogueado');
-            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
-        }
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('registro') === 'ok') {
-          alert("✅ Usuario registrado correctamente");
-          // También puedes usar un div en vez del alert
-        }
-       
-    </script>
+	<script src = "js/logout.js"></script>
+    <script src = "js/registroOkPP.js"></script>
 </body>
 </html>

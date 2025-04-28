@@ -2,61 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel = stylesheet href = estilosListado.css>
-<link rel="stylesheet" href="estilosHeaderFooter.css"> 
-
-<script>
-
-
-function llamada(){
-	fetch('../GestionEmpleados?id=0&option=0')
-	.then(response => response.json())
-	.then(data => pintarDatos(data))
-}
-
-function borrar(id){
-
-	if(confirm("seguro que quieres borrar")){
-		
-    	fetch('../GestionEmpleados?id='+id+'&option=3')
-    	.then(response =>  response.json())
-    	.then(data => console.log(data))
-    	
-    	location.reload();
-
-	}
-	
-	
-}
-
-function pintarDatos(datos){
-	
-	let table = "";
-	
-	for (let i=0; i<datos.length; i++){
-		
-		table +=`<tr><td>
-		 ${datos[i].id}</td><td>
-		 ${datos[i].nombre}</td><td>
-		 ${datos[i].email}</td><td>
-		 ${datos[i].salario}</td><td>
-		 ${datos[i].departamento}</td><td>
-		 <a href='editorEmpleados.html?id=${datos[i].id}'>Editar</td><td>
-		 <a href="#" onclick="borrar(${datos[i].id})">Borrar</td></tr>`
-		
-	}
-	
-	table += "</table>";
-	
-	document.getElementById("tablaEmpleados").innerHTML = table;
-	
-}
-
-window.onload = llamada;
-
-</script>
-
+<title>Listado de Empleados</title>
+<link rel = stylesheet href = "styles/estilosListado.css">
+<link rel="stylesheet" href = "styles/estilosHeaderFooter.css"> 
 </head>
 <body>
 <header class="main-header">
@@ -87,14 +35,7 @@ window.onload = llamada;
 	<button onclick="logout()">Cerrar sesión</button>
     <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
 </footer>
-
-
-    <script>
-        // Función de logout
-        function logout() {
-            sessionStorage.removeItem('usuarioLogueado');
-            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
-        }
-    </script>
+	<script src = "js/listadoEmpleados.js"></script>
+    <script src = "js/logout.js"></script>
 </body>
 </html>

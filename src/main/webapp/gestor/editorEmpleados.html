@@ -2,52 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href = "estilosAlta.css">
-<link rel="stylesheet" href="estilosHeaderFooter.css">
-<script>
-
-
-function llamada(id){
-	fetch('../GestionEmpleados?id='+id+'&option=2')
-	.then(response =>  response.json())
-	.then(data => {
-		console.log(data);
-		llenarFormulario(data);
-	})
-	
-}
-
-
-function getQueryVariable(variable) {
- var query = window.location.search.substring(1);
- var vars = query.split("&");
- for (var i=0; i < vars.length; i++) {
-     var pair = vars[i].split("=");
-     if(pair[0] == variable) {
-         return pair[1];
-     }
- }
- return false;
-}
-
-
-function  llenarFormulario(datos) {
-	document.getElementById('id').value = datos.id;
-	document.getElementById('nombre').value = datos.nombre;
-	document.getElementById('email').value = datos.email;
-	document.getElementById('salario').value = datos.salario;
-	document.getElementById('departamento_id').value = datos.departamento_id;
-	console.log(datos.id);
-
-}
-
-window.onload = function(){
-	
-	llamada(getQueryVariable("id"));
-}
-
-</script>    
+<title>Editor de Empleados</title>
+<link rel="stylesheet" href = "styles/estilosAlta.css">
+<link rel="stylesheet" href = "styles/estilosHeaderFooter.css">
+   
 </head>
 <header class="main-header">
     <h1>Gestión de Empleados</h1>
@@ -80,19 +38,12 @@ window.onload = function(){
    
   </form>
   
-   <a href = "panelPrincipal.html" id="botonMenú">Menú Principal</a>
-     <footer class="main-footer">
+    <a href = "panelPrincipal.html" id="botonMenú">Menú Principal</a>
+    <footer class="main-footer">
 	<button onclick="logout()">Cerrar sesión</button>
     <p>&copy; 2025 - Aplicación desarrollada por Unai Bercianos</p>
 	</footer>
-
-
-    <script>
-        // Función de logout
-        function logout() {
-            sessionStorage.removeItem('usuarioLogueado');
-            window.location.href = '/EMPLEADOS/gestor/index.html'; // Redirige al login
-        }
-    </script>
+	<script src = "js/editorEmpleados.js"></script>
+    <script src = "js/logout.js"></script>
 </body>
 </html>

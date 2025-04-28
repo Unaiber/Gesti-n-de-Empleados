@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href = "estilosLogin.css">
+<title>Inicie Sesión</title>
+<link rel="stylesheet" href = "styles/estilosLogin.css">
 </head>
 
 <body>
@@ -19,13 +19,6 @@
     <button class="btn" type="submit">Entrar</button>
 </form>
 </main>
-
-
-	 <script>
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('error')) {
-            alert('Usuario o contraseña incorrectos. Intenta de nuevo.');
-        }
-    </script>
+<script src = "js/loginError.js"></script>
 </body>
 </html>
