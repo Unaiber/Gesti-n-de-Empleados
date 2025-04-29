@@ -40,37 +40,47 @@ public class GestionLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 // Comprobar si es un logout
-	    if (request.getParameter("logout") != null) {
-	        HttpSession session = request.getSession(false);
-	        if (session != null) {
-	            session.invalidate(); // Cerrar sesión en el servidor
-	        }
-	        response.sendRedirect("gestor/index.html");
-	        return;
-	    }
-		
-		String username = request.getParameter("username");
-        String password = request.getParameter("password");
 
-        try {
-            Usuario us = UsuariosDAO.obtenerUsername(username, password);
-            if (us != null) {
-                HttpSession sesion = request.getSession();
-                sesion.setAttribute("usuario", us);
-                //sesion.setAttribute("rol", us.getRol());
-                //sesion.setAttribute("usuarioLogueado", true);
-                response.sendRedirect("gestor/panelPrincipal.html");
-                
-                System.out.println("Usuario autenticado: " + us.getUsername());
-                System.out.println("Rol del usuario: " + us.getRol());
-                
-            } else {
-                response.sendRedirect("gestor/index.html?error=true");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("gestor/index.html?error=db");
-        }
-    }
+	    // Comprobar si la petición es para cerrar sesión (logout)
+	    if (request.getParameter("logout") != null) {
+	        HttpSession session = request.getSession(false); // Obtener sesión actual si existe
+	        if (session != null) {
+	            session.invalidate(); // Invalida (cierra) la sesión del usuario
+	        }
+	        response.sendRedirect("gestor/index.html"); // Redirige al login tras cerrar sesión
+	        return; // Salir del método
+	    }
+
+	    // Obtener los parámetros del formulario de login
+	    String username = request.getParameter("username");
+	    String password = request.getParameter("password");
+
+	    try {
+	        // Verificar las credenciales del usuario con la base de datos
+	        Usuario us = UsuariosDAO.obtenerUsername(username, password);
+
+	        if (us != null) {
+	            // Si el usuario es válido, crear o recuperar la sesión
+	            HttpSession sesion = request.getSession();
+	            sesion.setAttribute("usuario", us); // Guardar el usuario en la sesión
+
+	            // Redirigir al panel principal si el login fue exitoso
+	            response.sendRedirect("gestor/panelPrincipal.html");
+
+	            // Mensajes en consola para depuración
+	            System.out.println("Usuario autenticado: " + us.getUsername());
+	            System.out.println("Rol del usuario: " + us.getRol());
+
+	        } else {
+	            // Si las credenciales no son válidas, redirige al login con error
+	            response.sendRedirect("gestor/index.html?error=true");
+	        }
+
+	    } catch (SQLException e) {
+	        // Capturar posibles errores de conexión o consulta
+	        e.printStackTrace();
+	        response.sendRedirect("gestor/index.html?error=db"); // Redirige con error de base de datos
+	    }
+	}
+	
 }
