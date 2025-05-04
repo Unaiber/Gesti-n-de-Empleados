@@ -21,7 +21,7 @@ public class EmpleadosDAO {
 		this.con = DatabaseConnection.getConnection();		
 	}
 
-	// Método estático que devuelve una nueva instancia del DAO (no es un Singleton real, ver nota abajo)
+	// Método estático que devuelve una nueva instancia del DAO
 	public static EmpleadosDAO getConection () throws SQLException {
 		EmpleadosDAO ed = new EmpleadosDAO();
 		return ed;
@@ -119,6 +119,46 @@ public class EmpleadosDAO {
 		);
 		
 		return e;
+	}
+	//Clase exclusiva de testing
+	public Empleado obtenerEmpleadoPorEmail(String email) throws SQLException {
+	    String sql = "SELECT * FROM empleados WHERE email = ?";
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setString(1, email);
+	    ResultSet rs = ps.executeQuery();
+
+	    if (rs.next()) {
+	        return new Empleado(
+	            rs.getInt("id"),
+	            rs.getString("nombre"),
+	            rs.getString("email"),
+	            rs.getInt("salario"),
+	            rs.getString("departamento_id")
+	        );
+	    } else {
+	        return null;
+	    }
+	}
+	//Clase exclusiva de testing
+	public int borrarPorEmail(String email) throws SQLException {
+	    String sql = "DELETE FROM empleados WHERE email = ?";
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setString(1, email);
+	    int filas = ps.executeUpdate();
+	    ps.close();
+	    return filas;
+	}
+	
+	public int actualizarPorEmail(String emailOriginal, Empleado e) throws SQLException {
+	    String sql = "UPDATE empleados SET nombre = ?, email = ?, salario = ?, departamento_id = ? WHERE email = ?";
+	    try (PreparedStatement ps = con.prepareStatement(sql)) {
+	        ps.setString(1, e.getNombre());
+	        ps.setString(2, e.getEmail());
+	        ps.setInt(3, e.getSalario());
+	        ps.setInt(4, e.getDepartamento_id());
+	        ps.setString(5, emailOriginal);
+	        return ps.executeUpdate(); // devuelve el número de filas afectadas
+	    }
 	}
 }
 
