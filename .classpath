@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/JAVA/mysql-connector-j-9.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/JAVA/gson-2.12.1.jar"/>
 	<classpathentry kind="lib" path="C:/JAVA/jbcrypt-0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
