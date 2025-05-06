@@ -27,6 +27,11 @@ public class EmpleadosDAO {
 		return ed;
 	}
 	
+	// Nuevo constructor para test con conexión personalizada (ej: SQLite)
+	public EmpleadosDAO(Connection connection) {
+		this.con = connection;
+	}
+	
 	// Inserta un nuevo empleado en la base de datos
 	public void insertar(Empleado e) {
 		String sql = "INSERT INTO empleados (nombre,email,salario,departamento_id) VALUES(?,?,?,?)";
@@ -72,7 +77,7 @@ public class EmpleadosDAO {
 	// Recupera todos los empleados desde la base de datos y los devuelve en una lista
 	public ArrayList<Empleado> obtenerEmpleados() throws SQLException {
 		ArrayList<Empleado> lista = null;
-		String sql = "SELECT * FROM empleados";
+		String sql = "SELECT * FROM vista_empleado";
 		try (PreparedStatement ps = con.prepareStatement(sql);
 			 ResultSet rs = ps.executeQuery()) {
 
@@ -86,7 +91,7 @@ public class EmpleadosDAO {
 					rs.getString("nombre"),
 					rs.getString("email"),
 					rs.getInt("salario"),
-					rs.getString("departamento_id")
+					rs.getString("departamento")
 				));
 			}
 			return lista;
@@ -103,7 +108,7 @@ public class EmpleadosDAO {
 
 	// Obtiene un empleado a partir de su ID desde la vista 'vista_empleado'
 	public Empleado obtenerEmpleado (int id) throws SQLException {
-		String sql = "SELECT * FROM vista_empleado WHERE id = ?";
+		String sql = "SELECT * FROM empleados WHERE id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -120,46 +125,7 @@ public class EmpleadosDAO {
 		
 		return e;
 	}
-	//Clase exclusiva de testing
-	public Empleado obtenerEmpleadoPorEmail(String email) throws SQLException {
-	    String sql = "SELECT * FROM empleados WHERE email = ?";
-	    PreparedStatement ps = con.prepareStatement(sql);
-	    ps.setString(1, email);
-	    ResultSet rs = ps.executeQuery();
-
-	    if (rs.next()) {
-	        return new Empleado(
-	            rs.getInt("id"),
-	            rs.getString("nombre"),
-	            rs.getString("email"),
-	            rs.getInt("salario"),
-	            rs.getString("departamento_id")
-	        );
-	    } else {
-	        return null;
-	    }
-	}
-	//Clase exclusiva de testing
-	public int borrarPorEmail(String email) throws SQLException {
-	    String sql = "DELETE FROM empleados WHERE email = ?";
-	    PreparedStatement ps = con.prepareStatement(sql);
-	    ps.setString(1, email);
-	    int filas = ps.executeUpdate();
-	    ps.close();
-	    return filas;
-	}
 	
-	public int actualizarPorEmail(String emailOriginal, Empleado e) throws SQLException {
-	    String sql = "UPDATE empleados SET nombre = ?, email = ?, salario = ?, departamento_id = ? WHERE email = ?";
-	    try (PreparedStatement ps = con.prepareStatement(sql)) {
-	        ps.setString(1, e.getNombre());
-	        ps.setString(2, e.getEmail());
-	        ps.setInt(3, e.getSalario());
-	        ps.setInt(4, e.getDepartamento_id());
-	        ps.setString(5, emailOriginal);
-	        return ps.executeUpdate(); // devuelve el número de filas afectadas
-	    }
-	}
 }
 
 
