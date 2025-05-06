@@ -21,7 +21,7 @@ public class Empleado {
     private int departamento_id; // Identificador del departamento al que pertenece el empleado
     private String departamento; // Nombre del departamento al que pertenece el empleado
     
-    // Constructor por defecto
+    // Constructor por defecto.
     public Empleado() {}
 
     /**
