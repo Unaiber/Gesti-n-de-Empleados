@@ -77,7 +77,7 @@ public class EmpleadosDAO {
 	// Recupera todos los empleados desde la base de datos y los devuelve en una lista
 	public ArrayList<Empleado> obtenerEmpleados() throws SQLException {
 		ArrayList<Empleado> lista = null;
-		String sql = "SELECT * FROM empleados";
+		String sql = "SELECT * FROM vista_empleado";
 		try (PreparedStatement ps = con.prepareStatement(sql);
 			 ResultSet rs = ps.executeQuery()) {
 
@@ -91,7 +91,7 @@ public class EmpleadosDAO {
 					rs.getString("nombre"),
 					rs.getString("email"),
 					rs.getInt("salario"),
-					rs.getString("departamento_id")
+					rs.getString("departamento")
 				));
 			}
 			return lista;

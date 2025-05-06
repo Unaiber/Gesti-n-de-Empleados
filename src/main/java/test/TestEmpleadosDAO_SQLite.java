@@ -23,22 +23,60 @@ public class TestEmpleadosDAO_SQLite {
         conn = DriverManager.getConnection("jdbc:sqlite::memory:");
         empleadosDAO = new EmpleadosDAO(conn);
 
-        // Crear tabla usando PreparedStatement
-        String sqlCrearTabla = """
+        // Crear tabla departamentos
+        String sqlCrearDepartamentos = """
+            CREATE TABLE departamentos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT NOT NULL
+            );
+        """;
+        try (PreparedStatement ps = conn.prepareStatement(sqlCrearDepartamentos)) {
+            ps.execute();
+        }
+
+        // Insertar departamentos
+        String sqlInsertDepartamentos = """
+            INSERT INTO departamentos (nombre) VALUES 
+            ('RRHH'),
+            ('TI'),
+            ('Marketing');
+        """;
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsertDepartamentos)) {
+            ps.executeUpdate();
+        }
+
+        // Crear tabla empleados
+        String sqlCrearEmpleados = """
             CREATE TABLE empleados (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT,
                 email TEXT,
                 salario INTEGER,
-                departamento_id INTEGER
+                departamento_id INTEGER,
+                FOREIGN KEY (departamento_id) REFERENCES departamentos(id)
             );
         """;
-
-        try (PreparedStatement ps = conn.prepareStatement(sqlCrearTabla)) {
+        try (PreparedStatement ps = conn.prepareStatement(sqlCrearEmpleados)) {
             ps.execute();
         }
 
-        // Usar EmpleadosDAO con conexión SQLite
+        // Crear vista vista_empleado
+        String vista_empleado = """
+            CREATE VIEW vista_empleado AS
+            SELECT 
+                e.id,
+                e.nombre,
+                e.email,
+                e.salario,
+                d.nombre AS departamento
+            FROM empleados e
+            JOIN departamentos d ON e.departamento_id = d.id;
+        """;
+        try (PreparedStatement ps = conn.prepareStatement(vista_empleado)) {
+            ps.execute();
+        }
+
+        // Inicializar DAO con conexión SQLite
         empleadosDAO = new EmpleadosDAO(conn);
     }
 
