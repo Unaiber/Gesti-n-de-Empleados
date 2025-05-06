@@ -19,21 +19,27 @@ import DAO.EmpleadosDAO;
  */
 @WebServlet("/GestionEmpleados")
 public class GestionEmpleados extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-       
     /**
-     * @see HttpServlet#HttpServlet()
+     * Constructor de la clase {@link GestionEmpleados}.
+     * Este constructor invoca el constructor de la clase base {@link HttpServlet}.
      */
     public GestionEmpleados() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
- // Servlet para manejar operaciones GET y POST sobre empleados
+    /**
+     * Maneja las solicitudes GET para la gestión de empleados.
+     * Dependiendo del parámetro 'option', realiza diferentes operaciones sobre los empleados,
+     * como obtener todos los empleados, obtener un empleado por su ID o eliminar un empleado.
+     * 
+     * @param request La solicitud HTTP del cliente.
+     * @param response La respuesta HTTP que se enviará al cliente.
+     * @throws ServletException Si ocurre un error al procesar la solicitud.
+     * @throws IOException Si ocurre un error de entrada/salida al manejar la solicitud.
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Obtener parámetros 'id' y 'option' de la URL
@@ -93,7 +99,15 @@ public class GestionEmpleados extends HttpServlet {
         }
     }
 
-    // Método que maneja las peticiones POST (crear o actualizar empleados)
+    /**
+     * Maneja las solicitudes POST para la creación o actualización de empleados.
+     * Dependiendo de si se proporciona un ID, el método actualizará un empleado existente o insertará uno nuevo.
+     * 
+     * @param request La solicitud HTTP del cliente.
+     * @param response La respuesta HTTP que se enviará al cliente.
+     * @throws ServletException Si ocurre un error al procesar la solicitud.
+     * @throws IOException Si ocurre un error de entrada/salida al manejar la solicitud.
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Recoger parámetros del formulario
@@ -131,3 +145,4 @@ public class GestionEmpleados extends HttpServlet {
     }
 
 }
+
