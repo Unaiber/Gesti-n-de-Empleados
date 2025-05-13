@@ -34,8 +34,6 @@ public class GestionLogin extends HttpServlet {
 	}
 
 	/**
-	 * Maneja las solicitudes GET para la gestión del login. Actualmente no se
-	 * implementa ninguna lógica para el método GET.
 	 * 
 	 * @param request  La solicitud HTTP del cliente.
 	 * @param response La respuesta HTTP que se enviará al cliente.
