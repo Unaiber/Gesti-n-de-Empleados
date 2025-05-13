@@ -1,0 +1,1 @@
+Hola! Este proyecto es mi TFM del Máster de Java y Desarrollo Full Stack de la Academia Atrium. Toda la información sobre el proyecto lo encontrarás en la Guía de Implementación y uso básico. Detalles del programa en la Memoria del proyecto.
